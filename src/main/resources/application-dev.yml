@@ -1,0 +1,9 @@
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:postgresql://charles.cljecmnx9p0k.us-east-2.rds.amazonaws.com/meals_dev
+    username: ENC(TkGbBS+Oq4ul8edYnwYbUg==)
+    password: ENC(ygdbo3uS8SG5LkWyQfDl9Vl1dPqWI4kT)
+server:
+  port: 8312
+  context-path: /MealService

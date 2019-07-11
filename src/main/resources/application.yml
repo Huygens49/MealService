@@ -1,0 +1,10 @@
+spring:
+  data.rest.detection-strategy: annotated
+  jpa:
+    show-sql: true
+    open-in-view: true
+    properties:
+      hibernate.jdbc.lob.non_contextual_creation: true
+name: MealService
+hibernate:
+  dialect: org.hibernate.dialect.PostgreSQLDialect
