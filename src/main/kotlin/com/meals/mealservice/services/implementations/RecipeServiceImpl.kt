@@ -28,7 +28,23 @@ class RecipeServiceImpl(@Autowired private val recipeRepository: RecipeRepositor
     override fun updateRecipe(id: Int, recipe: Recipe) {
         val updateRecipe = getRecipeById(id)
         updateRecipe.name = recipe.name
-        updateRecipe.ingredients = recipe.ingredients
+
+        // Delete removed ingredients
+        val toBeDeleted = updateRecipe.ingredients.filter { i -> !recipe.ingredients.any { i2 -> i.id == i2.id }}
+        toBeDeleted.forEach { updateRecipe.ingredients.remove(it) }
+
+        // Update ingredients
+        updateRecipe.ingredients.forEach {
+            val ingredient = recipe.ingredients.firstOrNull { i -> i.id == it.id }
+
+            if (ingredient != null) {
+                it.name = ingredient.name
+            }
+        }
+
+        // Add new ingredients
+        val toBeAdded = recipe.ingredients.filter { it.id == null }
+        updateRecipe.ingredients.addAll(toBeAdded)
 
         recipeRepository.save(updateRecipe)
     }

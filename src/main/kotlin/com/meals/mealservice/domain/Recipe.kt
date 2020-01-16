@@ -20,7 +20,7 @@ data class Recipe(
                 joinColumns = [JoinColumn(name = "recipe_id")],
                 inverseJoinColumns = [JoinColumn(name = "ingredient_id")]
         )
-        var ingredients: List<Ingredient>
+        var ingredients: MutableList<Ingredient>
 ) {
     @JsonIgnore
     @OneToMany(mappedBy = "recipe", cascade = [CascadeType.REMOVE])
